@@ -1,20 +1,27 @@
     import { FcCheckmark } from "react-icons/fc";
     import { FcEmptyTrash } from "react-icons/fc";
-    import { useState } from "react";
+    import React ,{ useEffect, useState } from "react";
     function Todo() {
         const [allTodos, setTodos] = useState([]);
         const [newTitle, setNewTitle] = useState("");
         const [newDescription, setNewDescription] = useState("");
 
-        function handleAddTodo() {
+        const handleAddTodo = () => {
         let newTodoItem = {
         title: newTitle,
-        Description: newDescription,
-        };
-        let updatedTodoArr = [...allTodos];
-        updatedTodoArr.push(newTodoItem);
-        setTodos(updatedTodoArr);
+        Description: newDescription
+        }
+        let updatedTodoArray = [...allTodos];
+        updatedTodoArray.push(newTodoItem);
+        setTodos(updatedTodoArray);
+        localStorage.setItem('todolist',JSON.stringify(updatedTodoArray))
     }
+        // useEffect(()=>{
+        //     let savedTodo=JSON.parse(localStorage.getItem('todolist'));
+        //     if(savedTodo){
+        //         setTodos(savedTodo);
+        //     }
+        // },[])
     return (
         <div className="Todo">
         <h1>My Todo List</h1>
@@ -34,7 +41,7 @@
                 <label>Description</label>
                 <input
                 type="text"
-                placeholder="Description"
+                placeholder="Task's Description"
                 value={newDescription}
                 onChange={(e) => setNewDescription(e.target.value)}
                 />
@@ -55,12 +62,12 @@
                 return (
                 <div className="todo-list-item" key={index}>
                     <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.Description}</p>
+                        <h3>{item.title}</h3>
+                        <p>{item.Description}</p>
                     </div>
                     <div className="icons">
-                    <FcEmptyTrash className="delete-icon" />
-                    <FcCheckmark className="check-icon" />
+                        <FcEmptyTrash className="delete-icon" />
+                        <FcCheckmark className="check-icon" />
                     </div>
                 </div>
                 );
