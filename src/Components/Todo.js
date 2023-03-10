@@ -1,4 +1,3 @@
-    import { FcCheckmark } from "react-icons/fc";
     import { FcEmptyTrash } from "react-icons/fc";
     import React ,{ useEffect, useState } from "react";
     function Todo() {
@@ -16,6 +15,14 @@
         setTodos(updatedTodoArray);
         localStorage.setItem('todolist',JSON.stringify(updatedTodoArray))
     }
+    
+        const handleDeleteTodo = (index)=> {
+        let reducedTodo=[...allTodos];
+        reducedTodo.splice(index);
+        localStorage.setItem('todolist',JSON.stringify(reducedTodo));
+        setTodos(reducedTodo);
+        }
+        
         // useEffect(()=>{
         //     let savedTodo=JSON.parse(localStorage.getItem('todolist'));
         //     if(savedTodo){
@@ -50,7 +57,7 @@
             <div className="todo-input-item">
                 <button
                 type="button"
-                onclick={handleAddTodo}
+                onClick={handleAddTodo}
                 className="Add-Button"
                 >
                 Add
@@ -66,8 +73,7 @@
                         <p>{item.Description}</p>
                     </div>
                     <div className="icons">
-                        <FcEmptyTrash className="delete-icon" />
-                        <FcCheckmark className="check-icon" />
+                        <FcEmptyTrash className="delete-icon" onClick={()=>handleDeleteTodo(index)}/>
                     </div>
                 </div>
                 );
@@ -76,6 +82,6 @@
         </div>
         </div>
     );
-    }
+}
 
     export default Todo;
