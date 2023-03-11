@@ -5,7 +5,7 @@
         const [newTitle, setNewTitle] = useState("");
         const [newDescription, setNewDescription] = useState("");
 
-        const handleAddTodo = () => {
+    const handleAddTodo = () => {
         let newTodoItem = {
         title: newTitle,
         Description: newDescription
@@ -16,12 +16,18 @@
         localStorage.setItem('todolist',JSON.stringify(updatedTodoArray))
     }
     
-        const handleDeleteTodo = (index)=> {
+    const handleDeleteTodo = (index)=> {
         let reducedTodo=[...allTodos];
-        reducedTodo.splice(index);
+        reducedTodo.splice(index,1);
         localStorage.setItem('todolist',JSON.stringify(reducedTodo));
         setTodos(reducedTodo);
+    }
+
+    const handleDeleteAllTodo = ()=>{
+        if (setTodos.length>0 && window.confirm('Do you want to delete all task ?')) {
+            setTodos([]);
         }
+    }
         
         // useEffect(()=>{
         //     let savedTodo=JSON.parse(localStorage.getItem('todolist'));
@@ -54,13 +60,21 @@
                 />
             </div>
 
-            <div className="todo-input-item">
+            <div className="buttons">
                 <button
                 type="button"
                 onClick={handleAddTodo}
                 className="Add-Button"
                 >
                 Add
+                </button>
+
+                <button
+                type="button"
+                onClick={handleDeleteAllTodo}
+                className="Delete-Button"
+                >
+                Delete All
                 </button>
             </div>
             </div>

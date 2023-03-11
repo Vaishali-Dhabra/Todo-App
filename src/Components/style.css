@@ -51,17 +51,21 @@ h1{
     border: 3px solid cornflowerblue;
     outline: none;
 }
-.Add-Button{
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.Add-Button,.Delete-Button{
     background-color: cornflowerblue ;
     color: white;
     border: none;
     border-radius: 3px;
     margin-top: 2rem;
     padding: 6px;
-    width: 4rem;
     cursor: pointer;
 }
-.Add-Button:hover{
+.Add-Button:hover,.Delete-Button:hover{
     background-color: rgb(55, 85, 141);
 }
 .todo-list{
@@ -86,7 +90,7 @@ h1{
     margin-top: 0px;
 }
 .delete-icon{
-    font-size: 35px;
+    font-size: 30px;
     cursor: pointer;
 }
 .check-icon{
